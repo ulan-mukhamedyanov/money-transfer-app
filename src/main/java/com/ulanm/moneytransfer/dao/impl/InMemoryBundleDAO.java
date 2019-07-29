@@ -4,19 +4,14 @@ import com.ulanm.moneytransfer.dao.AccountDAO;
 import com.ulanm.moneytransfer.dao.BundleDAO;
 import com.ulanm.moneytransfer.dao.TransactionDAO;
 import com.ulanm.moneytransfer.dao.UserDAO;
-import com.ulanm.moneytransfer.exception.ServiceException;
 import com.ulanm.moneytransfer.model.impl.Account;
 import com.ulanm.moneytransfer.model.impl.Transaction;
 import com.ulanm.moneytransfer.model.impl.User;
-import com.ulanm.moneytransfer.service.UserService;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class InMemoryBundleDAO implements BundleDAO {
 
@@ -25,9 +20,9 @@ public class InMemoryBundleDAO implements BundleDAO {
     private final TransactionDAO transactionDAO = new TransactionInMemoryDAO();
 
     private static DecimalFormat format = new DecimalFormat("#.00");
-    private static List<String> testUserIds = new ArrayList<>();
-    private static List<String> testAccountIds = new ArrayList<>();
-    private static List<String> testTransactionIds = new ArrayList<>();
+    private static List<String> testUserIds = Collections.synchronizedList(new ArrayList<>());
+    private static List<String> testAccountIds = Collections.synchronizedList(new ArrayList<>());
+    private static List<String> testTransactionIds = Collections.synchronizedList(new ArrayList<>());
 
     @Override
     public UserDAO getUserDAO() {
