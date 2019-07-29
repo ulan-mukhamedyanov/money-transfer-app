@@ -10,6 +10,8 @@ import java.time.temporal.TemporalAccessor;
 
 public class DateTimeSerializer extends StdSerializer<TemporalAccessor> {
 
+    private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     public DateTimeSerializer() {
         this(null);
     }
@@ -22,7 +24,6 @@ public class DateTimeSerializer extends StdSerializer<TemporalAccessor> {
     public void serialize(
             TemporalAccessor temporalAccessor, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
             throws IOException {
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         jsonGenerator.writeString(df.format(temporalAccessor));
     }
 }

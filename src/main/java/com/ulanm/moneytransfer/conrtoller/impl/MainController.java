@@ -51,8 +51,6 @@ public class MainController implements Controller {
                     .end("<h1>Money Transfer App</h1>");
         });
 
-        router.route("/assets/*").handler(StaticHandler.create("assets"));
-
         Controller accountController = new AccountController(vertx);
         router.mountSubRouter("/account", accountController.initAndGetRouter());
 

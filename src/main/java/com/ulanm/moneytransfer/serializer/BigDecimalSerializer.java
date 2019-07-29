@@ -11,6 +11,8 @@ import java.util.Currency;
 
 public class BigDecimalSerializer extends StdSerializer<BigDecimal> {
 
+    private static final DecimalFormat df = new DecimalFormat("#.00");
+
     public BigDecimalSerializer() {
         this(null);
     }
@@ -21,7 +23,6 @@ public class BigDecimalSerializer extends StdSerializer<BigDecimal> {
 
     @Override
     public void serialize(BigDecimal bigDecimal, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        DecimalFormat df = new DecimalFormat("#.00");
         jsonGenerator.writeString(df.format(bigDecimal));
     }
 
